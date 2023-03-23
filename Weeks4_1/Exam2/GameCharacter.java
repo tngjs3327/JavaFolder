@@ -25,7 +25,18 @@ public class GameCharacter {
   public void add(String argName, int argType, int argPrice) {
     GameItem item = new GameItem();
     item.name = argName;
+    item.type = argType;
+    item.price = argPrice;
+    gameItemList.add(item);
+  }
 
+  public void print() {
+    int total = 0;
+    for (GameItem item : gameItemList) {
+      System.out.println(item);
+      total += item.getPrice();
+    }
+    System.out.println("합계 : " + total);
   }
 
 }
