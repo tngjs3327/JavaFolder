@@ -5,6 +5,7 @@ import Weeks10_1.interfaceTest.*;
 public class CallbackTest2 {
   public void remoteControl(RemoteControl rc) {
     rc.turnOn();
+    System.out.println("remoteControl Method 호출완료");
   }
 
   public static void main(String[] args) {
@@ -14,34 +15,72 @@ public class CallbackTest2 {
     // 2. 변수 사용하지 않고 전달해보고
     // 화면에는 파나소닉 테레비가 켜졌습니다.
 
-    RemoteControl rc = new RemoteControl() {
+    /*
+     * RemoteControl rc = new RemoteControl() {
+     * 
+     * @Override
+     * public void turnOn() {
+     * System.out.println("파나소닉 테레비가 켜졌습니다.");
+     * }
+     * 
+     * @Override
+     * public void turnOff() {
+     * System.out.println("파나소닉 테레비가 꺼졌습니다.");
+     * };
+     * 
+     * };
+     * 
+     * cb.remoteControl(rc);
+     */
 
-      @Override
-      public void turnOn() {
-        System.out.println("파나소닉 테레비가 켜졌습니다.");
-      }
+    /*
+     * cb.remoteControl(new RemoteControl() {
+     * 
+     * @Override
+     * public void turnOn() {
+     * System.out.println("파나소닉 테레비가 켜졌습니다.");
+     * }
+     * 
+     * @Override
+     * public void turnOff() {
+     * System.out.println("파나소닉 테레비가 꺼졌습니다.");
+     * };
+     * 
+     * });
+     */
 
-      @Override
-      public void turnOff() {
-        System.out.println("파나소닉 테레비가 꺼졌습니다.");
-      };
+    cb.remoteControl(new PanasonicTv());
+    cb.remoteControl(new SamsungTv());
+    cb.remoteControl(new LgTv());
 
-    };
-
-    cb.remoteControl(rc);
     cb.remoteControl(new RemoteControl() {
 
       @Override
       public void turnOn() {
-        System.out.println("파나소닉 테레비가 켜졌습니다.");
+        System.out.println("No Brand TV를 켭니다.");
       }
 
       @Override
       public void turnOff() {
-        System.out.println("파나소닉 테레비가 꺼졌습니다.");
+        System.out.println("No Brand TV를 끕니다.");
       };
 
     });
+
   }
+
+}
+
+class PanasonicTv implements RemoteControl {
+
+  @Override
+  public void turnOn() {
+    System.out.println("파나소닉 테레비를 켭니다.");
+  }
+
+  @Override
+  public void turnOff() {
+    System.out.println("파나소닉 테레비를 끕니다.");
+  };
 
 }
