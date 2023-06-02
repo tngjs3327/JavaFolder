@@ -58,6 +58,7 @@ public class Test {
     // }
     // });
 
+    // 람다식은 오직 하나의 추상메소드만 가지는 인터페이스 타입의 객체를 람다식으로 생성할 수 있다
     // 람다식은 이름없는 메소드라 할 수 있다.
     // 람다식을 이용하는 이유는 간결하기 때문이다
     // 람다식을 이용하는 메소드가 필요한 곳에 간단히 메소드를 보낼 수 있다
@@ -94,13 +95,17 @@ public class Test {
 
     // 람다식을 이용해서 printPersons 메소드를 호출하고,
     // 그 결과로 나이 20에서 30살 사이의 여자만 출력되도록 구현하라
-    printPersons(list, p -> p.getAge() >= 20 && p.getAge() <= 30 && p.getGender() == Sex.FEMALE);
+    // printPersons(list, p -> p.getAge() >= 20 && p.getAge() <= 30 && p.getGender()
+    // == Sex.FEMALE);
 
     /*
      * // 람다 형식
      * // printPersons(list, (p) -> p.getGender() == Sex.MALE && p.getAge() >= 18 &&
      * // p.getAge() <= 25);
      */
+
+    System.out.println(sum(100, 21, 323, (int n1, int n2) -> n1 + n2));
+    
 
   }
 
@@ -139,10 +144,21 @@ public class Test {
     }
   }
 
+  public static int sum(int n1, int n2, int n3, Plus add) {
+
+    int result = add.add(n1, n2);
+    result = add.add(result, n3);
+    return result;
+  }
+
 } // public class Test end brace
 
 interface CheckPerson {
   boolean test(Person p);
+}
+
+interface Plus {
+  int add(int n1, int n2);
 }
 
 class CheckPersonMale18to25 implements CheckPerson {
